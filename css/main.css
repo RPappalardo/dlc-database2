@@ -1,0 +1,135 @@
+.bg-white {
+  background-color: #fff;
+}
+
+body {
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+#home_link,
+#log_off {
+  border-radius: 0px;
+}
+
+
+#header {
+  height: 140px;
+  background-size: 20%;
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+  background-position: left;
+  /* width: 100%; */
+  /* background-color: white; */
+  background-color: rgb(39, 160, 208);
+  background-image: url("images/50th-wide-30.png");
+  min-height: 20px;
+  padding: 19px;
+  color: white;
+  font-family: "Bree Serif", "Droid Serif", Arial, serif;
+  /* border: 3px; */
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
+}
+
+.padded {
+  padding: 19px;
+}
+
+.background-light {
+  background-image: none;
+/*  background-color: rgb(235, 234, 232); */
+}
+
+.blue {
+  /*color:rgb(39, 160, 208);*/
+  color: #56a0d3;
+}
+
+.box {
+  margin-left: 5%;
+}
+
+.btn {
+  box-shadow: 2px 2px 2px #c0c0c0;
+  border: none;
+}
+
+.input-sm,
+#inputTerm,
+#inputAdv1,
+#inputAdv2 {
+  border: 1px solid #c0c0c0;
+}
+
+div.hint {
+  font-size: 10px;
+  font-family: Sans-Serif;
+  color: red;
+  text-align: left;
+}
+
+.logo {
+  max-height: 50px;
+}
+
+
+.vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(+500%);
+}
+
+.wider {
+  text-align: center;
+  overflow: scroll;
+}
+
+
+#btn-group {
+  margin-bottom: 10px;
+}
+
+#errorBubble {
+  width: 34%;
+  height: 70px;
+  border-radius: 3px;
+  background-color: #fff5ee;
+  color: #000;
+  float: center;
+  padding: 10px;
+  text-align: center;
+  margin-left: 33%;
+}
+
+#post-btn {
+  vertical-align: bottom;
+  margin-bottom: 10px;
+}
+
+#submitBtn {
+  margin-left: 150px;
+  background-color: #56a0d3;
+}
+
+input[type=submit].btn-block {
+    width: 50%;
+}
+
+@media (min-width: 768px)
+{
+  .col-sm-4 {
+    float: right;
+}}
+
+h1{
+     text-align: center;
+}
