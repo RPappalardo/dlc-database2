@@ -10,14 +10,31 @@
 		<body class="background-light">
 			<?php
     include($_SERVER['DOCUMENT_ROOT']."/shared/header.php");
+	//	include($_SERVER['DOCUMENT_ROOT']."/scripts/dbconnect.php");
+
     ?>
+		<?php
+		$servername = "localhost";
+		$username = "root";
+		$password = "root";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password);
+
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+		echo "Connected successfully";
+
+		?>
 			<div class="container background-light padded" id="form-well">
 				<div class="paragraph padded">
 					<p>
 						<?php echo nl2br(file_get_contents($_SERVER['DOCUMENT_ROOT']."/paragraph/form.txt")); ?>
 					</p>
 				</div>
-				<form autocomplete="on" class="form-horizontal" action="/scripts/submit_form.php" enctype="multipart/form-data" method="GET" >
+				<form autocomplete="on" class="form-horizontal" action="/scripts/submit_form.php" enctype="multipart/form-data" method="GET" name= "unit_assignments">
 					<div class="col-sm-4">
 						<h4></h4>
 						<div class="panel panel-default background-light padded">
@@ -79,7 +96,7 @@
 								<div class="col-lg-8">
 									<select class="form-control" name="discipline" id="discipline">
 										<option value="" selected disabled>Please Select</option>
-										<option value="natural_sciences">Natural Sciences</option>
+										<option value="nat_sciences">Natural Sciences</option>
 										<option value="health_medicine">Health Medicine</option>
 										<option value="social_sciences">Social Sciences</option>
 										<option value="humanities">Humanities</option>

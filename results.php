@@ -18,9 +18,9 @@
 <div>
 	<?php
 	$host    = "localhost";
-	$user    = "username_here";
-	$pass    = "password_here";
-	$db_name = "database_name_here";
+	$user    = "root";
+	$pass    = "root";
+	$db_name = "unc_english";
 
 	//create connection
 	$connection = mysqli_connect($host, $user, $pass, $db_name);
@@ -34,7 +34,7 @@
 	}
 
 	//get results from database
-	$result = mysqli_query($connection,"SELECT * FROM products");
+	$result = mysqli_query($connection,"SELECT * FROM unit_assignments");
 	$all_property = array();  //declare an array for saving property
 
 	//showing property
