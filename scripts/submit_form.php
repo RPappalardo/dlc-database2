@@ -39,7 +39,7 @@ echo "Connected successfully";
 ////////////////////////////////////////////////////////////////////////////////////////
 //$db = db_connect();
 //$error = "";
-$result = mysqli_query($connection,"SELECT * FROM `unit_assignments` WHERE "course_designation" ");
+$result = mysqli_query($connection,"SELECT * FROM `unit_assignments` WHERE year = value ");
 
 $application_data = ["course_designation" => $_GET["course_designation"],
     "year" => $_GET["year"],
