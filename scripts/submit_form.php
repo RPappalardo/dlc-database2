@@ -38,7 +38,90 @@ echo "Connected successfully";
 //                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////
 
-/*$result = mysqli_query($connection,"SELECT * FROM `unit_assignments` WHERE year = value ");
+
+
+
+echo "1";
+
+
+
+
+/*		$course_designation = "course_designation";
+		$year = "year";
+		$discipline = "discipline";
+		$digital_literacy = "digital_literacy";
+		$genre = "genre";
+		$method = "method"; */
+//				if(isset($_GET['submit'])) {
+		// define the list of fields
+		$fields = array('course_designation', 'year', 'discipline', 'digital_literacy', 'genre', 'method');
+	//$fields = array($course_designation, $year, $discipline, $digital_literacy, $genre, $method);
+
+		$conditions = array();
+echo "2";
+		// loop through the defined fields
+		foreach($fields as $field){
+				// if the field is set and not empty
+				if(isset($_[$field]) && $_GET[$field] != '') {
+						// create a new condition while escaping the value inputed by the user (SQL Injection)
+						$conditions[] = "`$field` LIKE '%" . mysqli_real_escape_string($_GET[$field]) . "%'";
+				}
+		}
+//			}
+echo "3";
+		// builds the query
+		$query = "SELECT * FROM unit_assignments ";
+	//	$query = mysqli_query($conn,"SELECT * FROM unit_assignments ");
+	echo count($conditions);
+
+		// if there are conditions defined
+		if(count($conditions) > 0) {
+				// append the conditions
+echo "hello";
+				$query .= "WHERE " . implode (' AND ', $conditions); // you can change to 'OR', but I suggest to apply the filters cumulative
+		}
+
+		echo "$query";
+
+	$result = mysqli_query($mysqli_link, $query);
+
+
+	mysqli_close($mysqli_link);
+
+			if(isset($_GET['submit'])) {
+					while($row = mysqli_fetch_array($result)) {
+					$course_designation = $row['course_designation'];
+					$year = $row['year'];
+					$discipline = $row['discipline'];
+					$digital_literacy = $row['digital_literacy'];
+					$genre = $row['genre'];
+					$method = $row['method'];
+
+
+	echo "Course: $course_designation<br>Year: $year<br>Discipline: $discipline<br>digital_literacy: $digital_literacy<br>Genre: $genre<br>Method: $method<br>";
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*$result = mysqli_query($conn,"SELECT * FROM `unit_assignments` WHERE year = value ");
 
 $application_data = ["course_designation" => $_GET["course_designation"],
     "year" => $_GET["year"],
@@ -57,53 +140,69 @@ echo $application_data["genre"];
 echo $application_data["method"];
 echo $application_data["publication_venue"];
 
-redirect_to("/form.php");
+redirect_to("/form.php"); */
+///////////////////////////////////////////////////////////////////////////////////
+/*
+if(isset($_GET['submit'])) {
+    // define the list of fields
+    $fields = array('course_designation', 'year', 'discipline', 'digital_literacy', 'genre', 'method', 'publication_venue');
+    $conditions = array();
 
-?> */
-
-
-$query = $_GET['unit_assignments'];
-// gets value sent over search form
-
-$min_length = 3;
-// you can set minimum length of the query if you want
-
-if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
-
-		$query = htmlspecialchars($query);
-		// changes characters used in html to their equivalents, for example: < to &gt;
-
-		$query = mysql_real_escape_string($query);
-		// makes sure nobody uses SQL injection
-
-		$raw_results = mysql_query("SELECT * FROM unit_assignments
-				WHERE (`discipline` LIKE '%".$query."%') OR (`digital_literacy` LIKE '%".$query."%') or (`genre` LIKE '%".$query."%') or (`method` LIKE '%".$query."%')") or die(mysql_error());
-				//OR (`course_designation` LIKE '%".$query."%') OR (`year` LIKE '%".$query."%') OR (`semester` LIKE '%".$query."%')")
-		// * means that it selects all fields, you can also write: `id`, `title`, `text`
-		// articles is the name of our table
-
-		// '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-		// it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-		// or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-
-		if(mysql_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-
-				while($results = mysql_fetch_array($raw_results)){
-				// $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
-
-						echo "<p><h3>".$results['title']."</h3>".$results['text']."</p>";
-						// posts results gotten from database(title and text) you can also show id ($results['id'])
-				}
-
-		}
-		else{ // if there is no matching rows do following
-				echo "No results";
-		}
-
+    // loop through the defined fields
+    foreach($fields as $field){
+        // if the field is set and not empty
+        if(isset($_[$field]) && $_GET[$field] != '') {
+            // create a new condition while escaping the value inputed by the user (SQL Injection)
+            $conditions[] = "`$field` LIKE '%" . mysqli_real_escape_string($_GET[$field]) . "%'";
+        }
+    }
 }
-else{ // if query length is less than minimum
-		echo "Minimum length is ".$min_length;
-}
+    // builds the query
+    $query = "SELECT * FROM unit_assignments ";
+	//	$query = mysqli_query($conn,"SELECT * FROM unit_assignments ");
+
+    // if there are conditions defined
+    if(count($conditions) > 0) {
+        // append the conditions
+echo "hello";
+        $query .= "WHERE " . implode (' AND ', $conditions); // you can change to 'OR', but I suggest to apply the filters cumulative
+    }
+
+		echo "$query";
+
+	$result = mysqli_query($mysqli_link, $query);
+
+
+	mysqli_close($mysqli_link);
+
+	    if(isset($_GET['submit'])) {
+	        while($row = mysqli_fetch_array($result)) {
+	        $course_designation = $row['course_designation'];
+	        $year = $row['year'];
+	        $discipline = $row['discipline'];
+	        $digital_literacy = $row['digital_literacy'];
+	        $genre = $row['genre'];
+	        $method = $row['method'];
+	        $publication_venue = $row['publication_venue'];
+
+
+	echo "Course: $course_designation<br>Year: $year<br>Discipline: $discipline<br>digital_literacy: $digital_literacy<br>Genre: $genre<br>Method: $method<br>publication_venue: $publication_venue<hr><br>";
+	        }
+	    }    */
+//////////////////////////////////////////////////////////////////////////////////////
+/*
+
+echo '<br /> Course:' $application_data["course_designation"];
+echo '<br /> Year:' $application_data["year"];
+echo '<br /> Discipline:' $application_data["discipline"];
+echo '<br /> Digital Literacy:' $application_data["digital_literacy"];
+echo '<br /> Genre:' $application_data["genre"];
+echo '<br /> Method:' $application_data["method"];
+echo '<br /> Publication Venue:' $application_data["publication_venue"];
+
+
+*/
+
 ?>
 
 

@@ -2,9 +2,10 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
+$db = "unit_assignments";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $db);
 
 // Check connection
 if ($conn->connect_error) {
