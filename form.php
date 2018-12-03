@@ -216,15 +216,18 @@
 					    // loop through the defined fields
 					    foreach($fields as $field){
 					        // if the field is set and not empty
-					        //if(isset($_POST[$field]) && $_POST[$field] != '')
+					        //if(isset($_POST[$field]) && $_POST[$field] != '') {
 									if(!empty($_POST[$field])) {
 					            // create a new condition while escaping the value inputed by the user (SQL Injection)
-					            $conditions[] = "`$field` LIKE '%" . mysqli_real_escape_string($_POST[$field]) . "%'";
+					           // $conditions[] = "`$field` LIKE '%" . mysqli_real_escape_string($_POST[$field]) . "%'";
+											$conditions[] = "$field` LIKE concat('%', ?, '%')" . mysqli_real_escape_string($_POST[$field]) . "%'";
+
 					        }
 					    }
 				//	}
 					    // builds the query
 					    $query = "SELECT * FROM unit_assignments ";
+
 					 //	$query = mysqli_query("SELECT * FROM unit_assignments ");
 						echo count($conditions);
 
